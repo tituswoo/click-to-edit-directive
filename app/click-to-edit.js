@@ -7,8 +7,13 @@ angular.module('tkw').directive('clickToEdit', function ($compile) {
 		return '<p>{{ data }}</p>';
 	}
 
-	function editTemplate(height) {
-		return '<textarea ng-blur="finishEditing()" style="height:' + height + 'px" ng-model="data"></textarea>';
+	function editTemplate(tag, height) {
+		tag = tag || 'textarea'
+		if (tag === 'input') {
+			return '<input type="text" ng-blur="finishEditing()" ng-model="data">';
+		} else {
+			return '<'+tag+' ng-blur="finishEditing()" style="height:' + height + 'px" ng-model="data"></'+tag+'>';
+		}
 	}
 
 	var linker = function (scope, elem, attrs) {
@@ -17,9 +22,8 @@ angular.module('tkw').directive('clickToEdit', function ($compile) {
 		elem.on('click', function () {
 			if (!editing) {
 				var height = elem[0].offsetHeight;
-				elem.html(editTemplate(height));
+				elem.html(editTemplate(scope.tag, height));
 				$compile(elem.contents())(scope);
-				elem[0].focus();
 				editing = true;
 			}
 		});	
@@ -40,7 +44,8 @@ angular.module('tkw').directive('clickToEdit', function ($compile) {
 		restrict: 'A',
 		scope: {
 			data: '=',
-			onComplete: '&'
+			onComplete: '&',
+			tag: '@'
 		},
 		replace: false,
 		link: linker
