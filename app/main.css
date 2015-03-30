@@ -1,0 +1,31 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+
+textarea {
+	width: 100%;
+	min-height: 55px;
+	padding: 3px;
+}
+
+div, p, textarea {
+	font-family: serif;
+	font-size: 20px;
+}
+
+.tw {
+	box-sizing: border-box;
+	transition: 0.1s linear all;
+	border: 1px solid transparent;
+}
+
+.tw > textarea {
+	padding: 0;
+	margin: 0;
+	border: 1px solid transparent;
+}
+
+.tw.click-to-edit:hover {
+	border: 1px solid blue;
+}
