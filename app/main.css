@@ -13,9 +13,8 @@
 	width: 100%;
 }
 
-.tw div, .tw p, .tw textarea {
-	font-family: serif;
-	font-size: 20px;
+.tw p {
+	white-space:pre-wrap;
 }
 
 .tw {
